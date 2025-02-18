@@ -1,0 +1,10 @@
+{
+    "API_KEY": "your_api_key_here",
+    "CLOUDFLARE_BUCKET_NAME": "your_bucket_name",
+    "CLOUDFLARE_API_URL": "https://your-cloudflare-url",
+    "CLOUDFLARE_TOKEN_VALUE": "your_token_value",
+    "CLOUDFLARE_ACCESS_KEY_ID": "your_access_key",
+    "CLOUDFLARE_SECRET_ACCESS_KEY": "your_secret_key",
+    "REGION_NAME": "us-west-1"
+  }
+  
