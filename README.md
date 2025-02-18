@@ -19,8 +19,19 @@ This project provides a real-time stock price analysis and alerting system using
 - **Alerting**: Email notifications (via `smtplib` or SendGrid)
 
 ## Setup
-1. Create an account on [Alpha Vantage](https://www.alphavantage.co/) and obtain an API key.
-2. Install the required dependencies:
-   ```bash
-   pip install -r requirements.txt
-```
+
+### 1. Obtain an API Key
+Create an account on [Alpha Vantage](https://www.alphavantage.co/) and obtain an API key to access real-time stock data.
+
+### 2. Set Up the Virtual Environment
+Follow the steps below to set up the virtual environment:
+
+```bash
+# Create a virtual environment
+python -m venv venv
+
+# For Windows users
+./venv/Scripts/activate
+
+# For Linux/Mac users
+source venv/bin/activate
