@@ -1,11 +1,17 @@
-import os
+import json
 
-API_KEY = os.environ.get('ALPHAVANTAGE_API_KEY')
-CLOUFLARE_BUCKET_NAME = os.environ.get('CLOUDFLARE_BUCKET_NAME')
-CLOUDFARE_API_URL = os.environ.get('CLOUDFARE_API_URL')
-CLOUDFARE_TOKEN_VALUE = os.environ.get('CLOUDFARE_TOKEN_VALUE')
-CLOUDFARE_ACCESS_KEY_ID = os.environ.get('CLOUDFARE_ACCESS_KEY_ID')
-CLOUDFARE_SECRET_ACCESS_KEY = os.environ.get('CLOUDFARE_SECRET_ACCESS_KEY')
-REGION_NAME = os.environ.get('REGION_NAME')
+# Load config.json
+with open("config.json", "r") as f:
+    config_data = json.load(f)
 
-symbol_tickers = ['INTC', 'NVDA', 'AAPL', 'GOOGL', 'AMZN', 'MSFT', 'IBM', 'TSLA', 'FB', 'NFLX']
+# Assign values to variables
+API_KEY = config_data.get("API_KEY")
+CLOUDFLARE_BUCKET_NAME = config_data.get("CLOUDFLARE_BUCKET_NAME")
+CLOUDFLARE_API_URL = config_data.get("CLOUDFLARE_API_URL")
+CLOUDFLARE_TOKEN_VALUE = config_data.get("CLOUDFLARE_TOKEN_VALUE")
+CLOUDFLARE_ACCESS_KEY_ID = config_data.get("CLOUDFLARE_ACCESS_KEY_ID")
+CLOUDFLARE_SECRET_ACCESS_KEY = config_data.get("CLOUDFLARE_SECRET_ACCESS_KEY")
+REGION_NAME = config_data.get("REGION_NAME")
+
+# Example stock symbols
+symbol_tickers = ['INTC', 'NVDA', 'AAPL', 'GOOGL', 'AMZN', 'MSFT', 'TSLA', 'FB', 'V', 'JPM']
