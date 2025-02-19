@@ -1,57 +1,100 @@
 # Real-time Stock Price Analysis and Alerting
 
 ## Project Overview
-This project provides a real-time stock price analysis and alerting system using the Alpha Vantage API. It fetches stock data, processes it with Python, stores it in a local PostgreSQL database, and sends email notifications when the stock price crosses user-defined thresholds.
+
+This project provides a real-time stock price analysis and alerting system. It fetches stock data using the Alpha Vantage API, processes it with Python (using Pandas), stores it in a local PostgreSQL database, and sends email notifications when the stock price crosses user-defined thresholds. The entire workflow is orchestrated using Apache Airflow.
 
 ## Features
-- Real-time stock price retrieval using Alpha Vantage API
-- Data processing and analysis with Python (Pandas)
-- Storage of stock data in a PostgreSQL database
-- Workflow orchestration with Apache Airflow
-- Email alerts sent via Python’s `smtplib` or SendGrid
+
+* **Real-time Stock Data:** Fetches real-time stock prices using the Alpha Vantage API.
+* **Data Processing:** Processes and analyzes stock data using Pandas.
+* **Data Storage:** Stores stock data in a local PostgreSQL database.
+* **Workflow Orchestration:**  Manages the entire workflow using Apache Airflow for scheduling and automation.
+* **Alerting:** Sends email alerts via Python's `smtplib` (or SendGrid) when stock prices cross predefined thresholds.
 
 ## Technologies Used
-- **Programming Language**: Python
-- **Data Ingestion**: `requests` (API calls)
-- **Data Processing**: `Pandas` (data manipulation)
-- **Data Storage**: PostgreSQL (local setup)
-- **Workflow Orchestration**: Apache Airflow
-- **Alerting**: Email notifications (via `smtplib` or SendGrid)
+
+* **Programming Language:** Python 3.12.8 (required for Airflow 2.10.5)
+* **Data Ingestion:** `requests` library for API calls
+* **Data Processing:** `pandas` library for data manipulation and analysis
+* **Data Storage:** PostgreSQL database
+* **Workflow Orchestration:** Apache Airflow 2.10.5
+* **Alerting:** `smtplib` (or SendGrid) for email notifications
+* **Virtual Environment:** `venv` 
+* **Package Management:** `pip`
 
 ## Setup
 
-### 1. Obtain an API Key
-Create an account on [Alpha Vantage](https://www.alphavantage.co/) and obtain an API key to access real-time stock data.
+### 1. Prerequisites
 
-### 2. Set Up the Virtual Environment
-Follow the steps below to set up the virtual environment:
+* **Python:** Downgrade to Python 3.12.8 using `pyenv`:
+    ```bash
+    pyenv install 3.12.8
+    pyenv global 3.12.8
+    ```
 
-```bash
-# Create a virtual environment
-python -m venv venv
+* **Java:** Install Java:
+    ```bash
+    # Example for macOS
+    brew install java
+    ```
 
-# For Windows users
-./venv/Scripts/activate
+* **PostgreSQL:** Install PostgreSQL:
+    ```bash
+    # Example for macOS
+    brew install postgresql
+    ```
 
-# For Linux/Mac users
-source venv/bin/activate
-```
-### 3. Setup Airflow
-In order to setup Airflow it is necessary to downgrade the Python version to a stable release as it is said here: [Releases Apache Airflow](https://github.com/apache/airflow/?tab=readme-ov-file#requirements), so I downgraded mine to `3.12.8` and the version of apache is 2.10.5 it should be done manually
-> Note: best way to downgrade your python version is to use [pyenv](https://github.com/pyenv/pyenv) 
-> `pyenv install 3.12` and then
-> `pyenv global 3.12` 
-```bash
-pip install 'apache-airflow==2.10.5' --constraint "https://raw.githubusercontent.com/apache/airflow/constraints-2.10.5/constraints-3.12.txt"
+### 2. Obtain an API Key
 
-# Running from MacOS
-airflow db init
-airflow users create --username admin --password admin --role Admin --email example.com@gmail.com --firstname John --lastname Doe
+1. Create an account on [Alpha Vantage](https://www.alphavantage.co/).
+2. Obtain your API key from the Alpha Vantage website.
 
-# These both should be runned at the same time
-airflow webserver -p 8080 &  # Start the Airflow webserver
-airflow scheduler &  # Start the Airflow scheduler
+### 3. Set Up the Virtual Environment
 
-# Make Sure to install java
-brew install java
-```
+1. Create and activate the virtual environment:
+    ```bash
+    python -m venv venv
+    source venv/bin/activate  # On Linux/macOS
+    ```
+
+2. Install project dependencies:
+    ```bash
+    pip install -r scripts/requirements.txt
+    ```
+
+### 4. Install and Configure Airflow
+
+1. Install Apache Airflow 2.10.5:
+    ```bash
+    pip install 'apache-airflow==2.10.5' --constraint "[https://raw.githubusercontent.com/apache/airflow/constraints-2.10.5/constraints-3.12.txt](https://raw.githubusercontent.com/apache/airflow/constraints-2.10.5/constraints-3.12.txt)"
+    ```
+
+2. Initialize the Airflow database:
+    ```bash
+    airflow db init
+    ```
+
+3. Create an admin user:
+    ```bash
+    airflow users create \
+        --username admin \
+        --password admin \
+        --role Admin \
+        --email example.com@gmail.com \
+        --firstname John \
+        --lastname Doe
+    ```
+
+4. Start the Airflow webserver and scheduler:
+    ```bash
+    airflow webserver -p 8080 &
+    airflow scheduler &
+    ```
+
+## 5. Access the Airflow UI
+
+Open your web browser and go to `http://localhost:8080` to access the Airflow UI.
+
+## Project Structure
+
