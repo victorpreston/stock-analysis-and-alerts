@@ -3,11 +3,9 @@ import os
 import config
 import boto3
 import psycopg2
-import requests
 import pandas as pd
 
 from pyspark.sql import SparkSession
-from pyspark.sql.functions import lit
 from pyspark.sql.types import StructType, StructField, StringType, LongType, DateType, FloatType
 
 # Initialize S3 client
@@ -23,14 +21,6 @@ s3 = boto3.client(
 spark = SparkSession.builder \
     .appName("Stock Analysis") \
     .getOrCreate()
-
-# PostgreSQL connection properties
-db_url = config.DB_URL
-db_properties = {
-    "user": config.DB_PROPERTIES.get("user"),
-    "password": config.DB_PROPERTIES.get("password"),
-    "driver": config.DB_PROPERTIES.get("driver")
-}
 
 def pandas_dtype_to_spark_dtype(pandas_dtype):
     if pandas_dtype == 'int64':
@@ -86,15 +76,56 @@ def download_file():
     return spark.createDataFrame(total_df, schema=schema)
         
 
-# Write DataFrame to PostgreSQL
-def write_to_postgresql(df, table_name, db_url, db_properties):
-    df.write.jdbc(url=db_url, table=table_name, mode='append', properties=db_properties)
+def write_to_postgresql(df, table_name):
+    # Write data to PostgreSQL
+    try:
+        conn = psycopg2.connect(
+            host=config.DB_HOSTNAME,
+            database=config.DB_USERNAME,
+            user=config.DB_USERNAME,
+            password=config.DB_PASSWORD,
+            port=config.DB_PORT_ID
+        )
+        cur = conn.cursor()
+        create_table_query = f"""
+            CREATE TABLE IF NOT EXISTS {table_name} (
+                Date DATE,
+                Open FLOAT,
+                High FLOAT,
+                Low FLOAT,
+                Close FLOAT,
+                Volume FLOAT,
+                Symbol VARCHAR(10)
+            )
+        """
+        cur.execute(create_table_query)
+
+        print(f"Table {table_name} created successfully")
+
+        insert_query = f"""
+            INSERT INTO {table_name} (Date, Open, High, Low, Close, Volume, Symbol)
+            VALUES (%s, %s, %s, %s, %s, %s, %s)
+        """
+
+        insert_values = df.collect()
+        print(f"Inserting {len(insert_values)} rows into {table_name}")
+        cur.executemany(insert_query, insert_values)
+        conn.commit()
+    except Exception as e:
+        print(f"Error writing to PostgreSQL: {e}") 
+        raise e
+    finally:
+        if cur is not None:
+            cur.close()
+        if conn is not None:
+            conn.close()
 
 if __name__ == '__main__':
+    # Download file from Cloudflare
     total_df = download_file()
-    total_df.tail(5)
-    # Write data to PostgreSQL
-    # write_to_postgresql(df, "stock_data", db_url, db_properties)
+
+    # Write data to PostgreSQL with spark dataframe
+    write_to_postgresql(total_df, "stock_data")
 
     # Stop Spark session
     spark.stop()
