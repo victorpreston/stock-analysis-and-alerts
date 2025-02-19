@@ -35,3 +35,12 @@ python -m venv venv
 
 # For Linux/Mac users
 source venv/bin/activate
+```
+### 3. Setup Airflow
+In order to setup Airflow it is necessary to downgrade the Python version to a stable release as it is said here: [Releases Apache Airflow](https://github.com/apache/airflow/?tab=readme-ov-file#requirements), so I downgraded mine to `3.12.8` and the version of apache is 2.10.5 it should be done manually
+> Note: best way to downgrade your python version is to use [pyenv](https://github.com/pyenv/pyenv) 
+> `pyenv install 3.12` and then
+> `pyenv global 3.12` 
+```bash
+pip install 'apache-airflow==2.10.5' --constraint "https://raw.githubusercontent.com/apache/airflow/constraints-2.10.5/constraints-3.12.txt"
+```
