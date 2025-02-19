@@ -14,7 +14,8 @@ CLOUDFLARE_SECRET_ACCESS_KEY = config_data.get("CLOUDFLARE_SECRET_ACCESS_KEY")
 REGION_NAME = config_data.get("REGION_NAME")
 
 # PostgreSQL connection properties
-DB_URL = config_data.get("db_url")
-DB_DRIVER = config_data.get("db_driver")
-DB_USERNAME = config_data.get("db_username")
-DB_PASSWORD = config_data.get("db_password")
+DB_DATABASE = config_data.get("DB_DATABASE")
+DB_HOSTNAME = config_data.get("DB_HOSTNAME")
+DB_USERNAME = config_data.get("DB_USERNAME")
+DB_PASSWORD = config_data.get("DB_PASSWORD")
+DB_PORT_ID = config_data.get("DB_PORT_ID")
