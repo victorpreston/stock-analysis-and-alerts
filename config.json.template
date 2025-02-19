@@ -5,6 +5,10 @@
     "CLOUDFLARE_TOKEN_VALUE": "your_token_value",
     "CLOUDFLARE_ACCESS_KEY_ID": "your_access_key",
     "CLOUDFLARE_SECRET_ACCESS_KEY": "your_secret_key",
-    "REGION_NAME": "apac" 
+    "REGION_NAME": "apac",
+    "db_url": "your_url",
+    "db_user" : "your_username",
+    "db_password" : "your_password",
+    "db_driver" : "your_driver"
   }
   

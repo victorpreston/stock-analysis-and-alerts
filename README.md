@@ -43,4 +43,15 @@ In order to setup Airflow it is necessary to downgrade the Python version to a s
 > `pyenv global 3.12` 
 ```bash
 pip install 'apache-airflow==2.10.5' --constraint "https://raw.githubusercontent.com/apache/airflow/constraints-2.10.5/constraints-3.12.txt"
+
+# Running from MacOS
+airflow db init
+airflow users create --username admin --password admin --role Admin --email example.com@gmail.com --firstname John --lastname Doe
+
+# These both should be runned at the same time
+airflow webserver -p 8080 &  # Start the Airflow webserver
+airflow scheduler &  # Start the Airflow scheduler
+
+# Make Sure to install java
+brew install java
 ```
