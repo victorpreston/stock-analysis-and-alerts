@@ -65,7 +65,7 @@ def ingest_data_to_cloudflare():
     )
 
     temp_dir = os.path.join(os.getcwd(), "temp")
-    
+
     for file in os.listdir(temp_dir):
         file_path = os.path.join(temp_dir, file)
         with open(file_path, "rb") as f:
@@ -79,8 +79,8 @@ if __name__ == '__main__':
         os.makedirs('temp')
 
     # Fetch data for each symbol
-    # for symbol in config.symbol_tickers:
-    #     fetch_data(symbol)
+    for symbol in config.symbol_tickers:
+        fetch_data(symbol)
 
     # Ingest data to cloudflare bucket
     ingest_data_to_cloudflare()
