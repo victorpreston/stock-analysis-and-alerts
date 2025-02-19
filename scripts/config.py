@@ -15,8 +15,6 @@ REGION_NAME = config_data.get("REGION_NAME")
 
 # PostgreSQL connection properties
 DB_URL = config_data.get("db_url")
-DB_PROPERTIES = {
-    "user": config_data.get("user"),
-    "password": config_data.get("password"),
-    "driver": config_data.get("driver")
-}
+DB_DRIVER = config_data.get("db_driver")
+DB_USERNAME = config_data.get("db_username")
+DB_PASSWORD = config_data.get("db_password")
