@@ -2,3 +2,7 @@ pip==25.0.1
 boto3==1.36.22
 requests==2.32.3
 apache-airflow==2.10.5
+psycopg2==2.9.10
+pyspark==3.5.4
+pandas==2.2.3
+setuptools==75.8.0

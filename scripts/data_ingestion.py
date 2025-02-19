@@ -1,15 +1,9 @@
-import io
 import os
 import csv
 import boto3
 import config
 import shutil
 import requests
-
-import requests
-import csv
-import config
-import os
 
 def fetch_data(symbol):
     """
@@ -73,13 +67,13 @@ def ingest_data_to_cloudflare():
             print(f"Uploaded {file} to {config.CLOUDFLARE_BUCKET_NAME}")
 
 
-if __name__ == '__main__':
+def run_ingestion(**kwargs):
     # Create temp directory
     if not os.path.exists('temp'):
         os.makedirs('temp')
 
     # Fetch data for each symbol
-    for symbol in config.symbol_tickers:
+    for symbol in kwargs.get('symbols', []):
         fetch_data(symbol)
 
     # Ingest data to cloudflare bucket

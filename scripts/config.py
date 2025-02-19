@@ -13,5 +13,10 @@ CLOUDFLARE_ACCESS_KEY_ID = config_data.get("CLOUDFLARE_ACCESS_KEY_ID")
 CLOUDFLARE_SECRET_ACCESS_KEY = config_data.get("CLOUDFLARE_SECRET_ACCESS_KEY")
 REGION_NAME = config_data.get("REGION_NAME")
 
-# Example stock symbols
-symbol_tickers = ['INTC', 'NVDA', 'AAPL', 'GOOGL', 'AMZN', 'MSFT', 'TSLA', 'FB', 'V', 'JPM']
+# PostgreSQL connection properties
+DB_URL = config_data.get("db_url")
+DB_PROPERTIES = {
+    "user": config_data.get("user"),
+    "password": config_data.get("password"),
+    "driver": config_data.get("driver")
+}
