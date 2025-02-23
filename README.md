@@ -95,6 +95,3 @@ This project provides a real-time stock price analysis and alerting system. It f
 ## 5. Access the Airflow UI
 
 Open your web browser and go to `http://localhost:8080` to access the Airflow UI.
-
-## Project Structure
-
