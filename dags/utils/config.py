@@ -1,7 +1,9 @@
+import os
 import json
 
-# Load config.json
-with open("../../config.json", "r") as f:
+CONFIG_PATH = os.path.join(os.path.dirname(__file__), "config.json")
+
+with open(CONFIG_PATH, "r") as f:
     config_data = json.load(f)
 
 # Top 25 symbols from the S&P 500
