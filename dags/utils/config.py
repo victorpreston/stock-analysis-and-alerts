@@ -1,7 +1,7 @@
 import json
 
 # Load config.json
-with open("config.json", "r") as f:
+with open("../../config.json", "r") as f:
     config_data = json.load(f)
 
 # Assign values to variables

@@ -11,22 +11,23 @@ The DAG consists of two main tasks:
 The DAG uses Airflow's TaskFlow API for structuring the workflow and handling dependencies.
 """
 
-from airflow.decorators import dag, task
-from datetime import datetime, timedelta
 import io
-import dags.utils.config as config
 import boto3
 import pandas as pd
+
+from dags.utils import config 
 from sqlalchemy import create_engine
+from airflow.decorators import dag, task
+from datetime import datetime, timedelta
 
 @dag(
     start_date=datetime(2024, 1, 1),
     schedule="@daily",
     catchup=False,
-    default_args={"owner": "airflow", "retries": 1, "retry_delay": timedelta(minutes=5)},
+    default_args={"owner": "airflow", "retries": 2, "retry_delay": timedelta(minutes=5)},
     tags=["stock_data", "cloudflare", "postgres"],
 )
-def stock_data_processing():
+def cloudflare_to_postgres_dag():
     
     @task
     def download_data() -> pd.DataFrame:
@@ -70,4 +71,4 @@ def stock_data_processing():
     total_df = download_data()
     write_to_postgresql(total_df)
     
-stock_data_processing()
+cloudflare_to_postgres_dag()

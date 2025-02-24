@@ -10,20 +10,21 @@ to a Cloudflare bucket daily. The DAG consists of two tasks:
 The DAG uses Airflow's TaskFlow API to define dependencies and structure the workflow.
 """
 
-from airflow.decorators import dag, task
-from datetime import datetime, timedelta
 import os
-import shutil
-import utils.config as config
 import csv
 import boto3
+import shutil
 import requests
+
+from dags.utils import config
+from airflow.decorators import dag, task
+from datetime import datetime, timedelta
 
 @dag(
     start_date=datetime(2024, 1, 1),
     schedule="@daily",
     catchup=False,
-    default_args={"owner": "airflow", "retries": 1, "retry_delay": timedelta(minutes=5)},
+    default_args={"owner": "airflow", "retries": 2, "retry_delay": timedelta(minutes=5)},
     tags=["stock_data", "cloudflare"],
 )
 def stock_data_ingestion():
