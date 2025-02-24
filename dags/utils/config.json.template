@@ -6,10 +6,11 @@
     "CLOUDFLARE_ACCESS_KEY_ID": "your_access_key",
     "CLOUDFLARE_SECRET_ACCESS_KEY": "your_secret_key",
     "REGION_NAME": "apac",
-    "db_database": "default",
-    "db_hostname": "localhost",
-    "db_username": "admin",  
-    "db_password": "admin",
-    "db_port_id": "5432"
+    "DB_DATABASE": "default",
+    "DB_HOSTNAME": "localhost",
+    "DB_USERNAME": "admin",  
+    "DB_PASSWORD": "admin",
+    "DB_PORT_ID": "5432",
+    "DB_TABLE_NAME": "table_name"
   }
   
