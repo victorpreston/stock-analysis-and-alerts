@@ -92,6 +92,12 @@ This project provides a real-time stock price analysis and alerting system. It f
     airflow scheduler &
     ```
 
+5. Alternatively use ASTRO CLI
+```bash
+brew install astro
+astro dev init
+astro dev start
+```
 ## 5. Access the Airflow UI
 
 Open your web browser and go to `http://localhost:8080` to access the Airflow UI.
