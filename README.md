@@ -1,4 +1,4 @@
-# Real-time Stock Price Analysis and Alerting
+# 🚀🚀🚀 Real-time Stock Price Analysis and Alerting 🚀🚀🚀
 
 ## Project Overview
 
@@ -58,46 +58,18 @@ This project provides a real-time stock price analysis and alerting system. It f
     source venv/bin/activate  # On Linux/macOS
     ```
 
-2. Install project dependencies:
-    ```bash
-    pip install -r scripts/requirements.txt
-    ```
-
-### 4. Install and Configure Airflow
-
-1. Install Apache Airflow 2.10.5:
+2. Install Apache Airflow 2.10.5:
     ```bash
     pip install 'apache-airflow==2.10.5' --constraint "[https://raw.githubusercontent.com/apache/airflow/constraints-2.10.5/constraints-3.12.txt](https://raw.githubusercontent.com/apache/airflow/constraints-2.10.5/constraints-3.12.txt)"
     ```
 
-2. Initialize the Airflow database:
+> Note: The project will setup using `astro dev init` which is very handy in this case
+3. Run Astro CLI:
     ```bash
-    airflow db init
+    astro dev init
+    astro dev start
     ```
 
-3. Create an admin user:
-    ```bash
-    airflow users create \
-        --username admin \
-        --password admin \
-        --role Admin \
-        --email example.com@gmail.com \
-        --firstname John \
-        --lastname Doe
-    ```
-
-4. Start the Airflow webserver and scheduler:
-    ```bash
-    airflow webserver -p 8080 &
-    airflow scheduler &
-    ```
-
-5. Alternatively use ASTRO CLI
-```bash
-brew install astro
-astro dev init
-astro dev start
-```
-## 5. Access the Airflow UI
+## 4. Access the Airflow UI
 
 Open your web browser and go to `http://localhost:8080` to access the Airflow UI.
