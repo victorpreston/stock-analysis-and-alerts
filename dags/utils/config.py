@@ -4,6 +4,8 @@ import json
 with open("../../config.json", "r") as f:
     config_data = json.load(f)
 
+# Top 25 symbols from the S&P 500
+symbols =  ["AAPL", "MSFT", "AMZN", "GOOGL", "GOOG", "FB", "TSLA", "BRK.B", "JPM", "JNJ", "V", "WMT", "PG", "MA", "UNH", "INTC", "HD", "VZ", "DIS", "NVDA", "ADBE", "CRM", "PYPL", "BAC", "NFLX"]
 # Assign values to variables
 API_KEY = config_data.get("API_KEY")
 CLOUDFLARE_BUCKET_NAME = config_data.get("CLOUDFLARE_BUCKET_NAME")

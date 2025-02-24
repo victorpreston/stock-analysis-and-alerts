@@ -72,11 +72,12 @@ def stock_data_ingestion():
         )
         for file in files:
             with open(file, "rb") as f:
+                # If the file is already in the bucket, it will be overwritten
                 s3.upload_fileobj(f, config.CLOUDFLARE_BUCKET_NAME, os.path.basename(file))
                 print(f"Uploaded {file} to {config.CLOUDFLARE_BUCKET_NAME}")
         shutil.rmtree('temp')
 
-    symbols = ["AAPL", "GOOGL", "AMZN"]
+    symbols = config.symbols
     saved_files = fetch_data(symbols)
     ingest_data_to_cloudflare(saved_files)
 
