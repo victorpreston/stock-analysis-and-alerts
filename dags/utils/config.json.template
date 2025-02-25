@@ -11,6 +11,7 @@
     "DB_USERNAME": "admin",  
     "DB_PASSWORD": "admin",
     "DB_PORT_ID": "5432",
-    "DB_TABLE_NAME": "table_name"
+    "DB_TABLE_NAME": "table_name",
+    "DB_DATABASE_NAME": "database_name"
   }
   
