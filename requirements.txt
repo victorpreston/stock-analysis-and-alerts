@@ -7,3 +7,6 @@ pandas==2.2.3
 setuptools==75.8.0
 pytest==8.3.4
 numpy==2.2.3
+dash==2.18.2
+plotly==6.0.0
+dash_bootstrap_components==1.7.1
