@@ -18,9 +18,9 @@ engine = create_engine(DB_URI)
 
 try:
     with engine.connect() as conn:
-        print("✅ Database connection successful!")
+        print("Database connection successful!")
 except Exception as e:
-    print("❌ Database connection failed:", str(e))
+    print("Database connection failed:", str(e))
 
 # Fetch stock data
 def fetch_data():
@@ -37,7 +37,7 @@ symbols = df["symbol"].unique()
 
 # App Layout
 app.layout = dbc.Container([
-    html.H1("📈 Stock Market Dashboard", className="text-center text-light mb-4"),
+    html.H1("Stock Market Dashboard", className="text-center text-light mb-4"),
     dcc.Dropdown(
         id="stock-dropdown",
         options=[{"label": symbol, "value": symbol} for symbol in symbols],
