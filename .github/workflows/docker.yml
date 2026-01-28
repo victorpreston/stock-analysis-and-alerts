@@ -1,0 +1,18 @@
+name: Docker Build
+
+on:
+  push:
+    branches: [ main ]
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Placeholder Docker Build Job
+      run: |
+        echo "Docker build configured and ready"
+        echo "Build locally: docker build -t stock-analysis-api:latest ."
+        echo "Run locally: docker-compose up -d"

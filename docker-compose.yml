@@ -1,0 +1,62 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: stock-db
+    environment:
+      POSTGRES_USER: ${DB_USERNAME:-admin}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-admin}
+      POSTGRES_DB: ${DB_DATABASE_NAME:-stock_db}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USERNAME:-admin}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  api:
+    build: .
+    container_name: stock-api
+    environment:
+      DB_HOSTNAME: postgres
+      DB_PORT_ID: 5432
+      DB_USERNAME: ${DB_USERNAME:-admin}
+      DB_PASSWORD: ${DB_PASSWORD:-admin}
+      DB_DATABASE_NAME: ${DB_DATABASE_NAME:-stock_db}
+      API_KEY: ${API_KEY}
+      SMTP_SERVER: ${SMTP_SERVER}
+      SMTP_PORT: ${SMTP_PORT}
+      SENDER_EMAIL: ${SENDER_EMAIL}
+      SENDER_PASSWORD: ${SENDER_PASSWORD}
+    ports:
+      - "8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - .:/app
+    command: uvicorn api.main:app --host 0.0.0.0 --port 8000 --reload
+
+  dash:
+    build: .
+    container_name: stock-dash
+    environment:
+      DB_HOSTNAME: postgres
+      DB_PORT_ID: 5432
+      DB_USERNAME: ${DB_USERNAME:-admin}
+      DB_PASSWORD: ${DB_PASSWORD:-admin}
+      DB_DATABASE_NAME: ${DB_DATABASE_NAME:-stock_db}
+    ports:
+      - "8050:8050"
+    depends_on:
+      - postgres
+    volumes:
+      - .:/app
+    command: python dash_app/app.py
+
+volumes:
+  postgres_data:

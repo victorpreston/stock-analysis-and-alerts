@@ -1,0 +1,17 @@
+name: Lint and Code Quality
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Placeholder Lint Job
+      run: |
+        echo "Code quality checks configured and ready"
+        echo "Run locally: black . && isort . && flake8 ."

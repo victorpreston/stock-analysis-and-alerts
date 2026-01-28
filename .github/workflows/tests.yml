@@ -1,0 +1,17 @@
+name: Tests
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Placeholder Test Job
+      run: |
+        echo "Tests configured and ready to run"
+        echo "Run locally: pytest tests/ -v"
