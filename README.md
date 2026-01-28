@@ -1,4 +1,4 @@
-# 🚀🚀🚀 Real-time Stock Price Analysis and Alerting 🚀🚀🚀
+# Real-time Stock Price Analysis and Alerting
 
 ## Project Overview
 
